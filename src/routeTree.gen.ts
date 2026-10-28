@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AllaRouteImport } from './routes/alla'
+import { Route as NyRouteImport } from './routes/ny'
+import { Route as VeckaRouteImport } from './routes/vecka'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AllaRoute = AllaRouteImport.update({
+  id: '/alla',
+  path: '/alla',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NyRoute = NyRouteImport.update({
+  id: '/ny',
+  path: '/ny',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VeckaRoute = VeckaRouteImport.update({
+  id: '/vecka',
+  path: '/vecka',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/alla': typeof AllaRoute
+  '/ny': typeof NyRoute
+  '/vecka': typeof VeckaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/alla': typeof AllaRoute
+  '/ny': typeof NyRoute
+  '/vecka': typeof VeckaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/alla': typeof AllaRoute
+  '/ny': typeof NyRoute
+  '/vecka': typeof VeckaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/alla' | '/ny' | '/vecka'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/alla' | '/ny' | '/vecka'
+  id: '__root__' | '/' | '/alla' | '/ny' | '/vecka'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AllaRoute: typeof AllaRoute
+  NyRoute: typeof NyRoute
+  VeckaRoute: typeof VeckaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/alla': {
+      id: '/alla'
+      path: '/alla'
+      fullPath: '/alla'
+      preLoaderRoute: typeof AllaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ny': {
+      id: '/ny'
+      path: '/ny'
+      fullPath: '/ny'
+      preLoaderRoute: typeof NyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vecka': {
+      id: '/vecka'
+      path: '/vecka'
+      fullPath: '/vecka'
+      preLoaderRoute: typeof VeckaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AllaRoute: AllaRoute,
+  NyRoute: NyRoute,
+  VeckaRoute: VeckaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
