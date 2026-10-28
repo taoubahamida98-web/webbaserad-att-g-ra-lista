@@ -6,7 +6,7 @@ import { addTask, COLORS, toISO, type TaskColor } from "@/lib/tasks";
 
 export const Route = createFileRoute("/ny")({
   validateSearch: (s: Record<string, unknown>): { date?: string } =>
-    typeof s.date === "string" ? { date: s.date } : {},
+    typeof s["date"] === "string" ? { date: s["date"] } : {},
   head: () => ({
     meta: [
       { title: "Lägg till en ny Task – To-do" },
